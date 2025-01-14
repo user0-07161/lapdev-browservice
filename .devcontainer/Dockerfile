@@ -21,8 +21,7 @@ RUN echo "root:root" | chpasswd && \
 
 RUN ln -sf /lib/systemd/systemd /lapdev-guest-agent && \
     chmod +x /lapdev-guest-agent
-    chattr +i /lapdev-guest-agent
-
+    
 COPY install_guest_agent.sh /root/install_guest_agent.sh
 
 # Create a non-root user for development
@@ -32,7 +31,7 @@ RUN useradd -ms /bin/bash dev && echo "dev:dev" | chpasswd && adduser dev sudo
 ENV container docker
 STOPSIGNAL SIGRTMIN+3
 
-RUN systemctl set-default multi-user.target
+RUN systemctl set-default sysinit.target
 
 # Set systemd as the entrypoint
 CMD ["/lib/systemd/systemd"]
