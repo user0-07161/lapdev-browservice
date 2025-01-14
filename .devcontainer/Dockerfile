@@ -9,7 +9,7 @@ RUN apt update && apt upgrade -y && apt install -y \
     sudo \
     dbus \
     vim \
-    docker \
+    docker.io \
     curl \
     git \
     && apt clean && rm -rf /var/lib/apt/lists/*
