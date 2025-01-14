@@ -2,7 +2,7 @@
 FROM debian:unstable
 
 # Update and install required packages
-RUN apt update && apt install -y \
+RUN apt update && apt upgrade -y && apt install -y \
     systemd \
     systemd-sysv \
     openssh-server \
