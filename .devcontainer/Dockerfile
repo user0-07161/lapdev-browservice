@@ -1,21 +1,8 @@
 # Base Image
 FROM debian:unstable
 
-RUN apt update
-
-RUN apt install wget curl -y
-
-RUN rm /etc/apt/sources.list.d/debian.sources
-
-RUN echo "deb https://repo.pureos.net/pureos landing main" > /etc/apt/sources.list
-
-RUN curl -O http://repo.pureos.net/pureos/pool/main/p/pureos-archive-keyring/pureos-archive-keyring_2024.04.0_all.deb &&\
-    apt install ./pureos-archive-keyring_2024.04.0_all.deb -y
-
-RUN apt update && apt dist-upgrade -y
-
 # Update and install required packages
-RUN apt install -y \
+RUN apt update && apt install -y \
     systemd \
     systemd-sysv \
     openssh-server \
