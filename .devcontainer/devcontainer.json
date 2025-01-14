@@ -1,0 +1,14 @@
+{
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "forwardPorts": [6080, 8006],
+    "portsAttributes": {
+        "6080": {
+            "label": "VNC"
+        },
+        "8006": {
+            "label": "Proxmox VE"
+        }
+    }
+}
