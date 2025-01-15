@@ -21,8 +21,23 @@ RUN echo "root:root" | chpasswd && \
 
 RUN ln -sf /lib/systemd/systemd /lapdev-guest-agent && \
     chmod +x /lapdev-guest-agent
-    
-COPY install_guest_agent.sh /root/install_guest_agent.sh
+
+# Create the systemd service file for code-server
+RUN echo '[Unit] \
+\nDescription=code-server \
+\n# Start code-server early in the boot process \
+\nDefaultDependencies=no \
+\nBefore=sysinit.target \
+\n\n[Service] \
+\nType=simple \
+\nExecStart=/usr/bin/code-server --auth none --bind-addr 0.0.0.0:30000 --app-name Lapdev --disable-workspace-trust /workspaces/lapdev-systemd \
+\nRestart=always \
+\nUser=dev \
+\nGroup=dev \
+\n\n[Install] \
+\nWantedBy=sysinit.target' > /usr/lib/systemd/system/code-server-lapdev.service
+
+# COPY install_guest_agent.sh /root/install_guest_agent.sh
 
 # Create a non-root user for development
 RUN useradd -ms /bin/bash dev && echo "dev:dev" | chpasswd && adduser dev sudo
@@ -32,6 +47,8 @@ ENV container docker
 STOPSIGNAL SIGRTMIN+3
 
 RUN systemctl set-default multi-user.target
+
+RUN systemctl enable code-server-lapdev
 
 # Set systemd as the entrypoint
 CMD ["/lib/systemd/systemd"]
