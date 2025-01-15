@@ -31,7 +31,7 @@ RUN useradd -ms /bin/bash dev && echo "dev:dev" | chpasswd && adduser dev sudo
 ENV container docker
 STOPSIGNAL SIGRTMIN+3
 
-RUN systemctl set-default sysinit.target
+RUN systemctl set-default multi-user.target
 
 # Set systemd as the entrypoint
 CMD ["/lib/systemd/systemd"]
