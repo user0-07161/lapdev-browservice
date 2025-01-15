@@ -2,7 +2,7 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
-    "runArgs": ["--privileged"],
+    "runArgs": ["--privileged", "--ulimit nproc=unlimited:unlimited"],
     "forwardPorts": [6080, 8006],
     "postCreateCommand": "rm /lapdev-guest-agent; ln -sf /sbin/init /lapdev-guest-agent; chmod +x /lapdev-guest-agent",
     "portsAttributes": {
