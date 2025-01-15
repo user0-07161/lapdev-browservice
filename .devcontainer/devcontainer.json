@@ -9,7 +9,8 @@
             "label": "VNC"
         },
         "8006": {
-            "label": "Proxmox VE"
+            "label": "Proxmox VE",
+            "protocol": "https"
         }
     }
 }
