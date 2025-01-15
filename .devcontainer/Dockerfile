@@ -1,23 +1,9 @@
 # Base Image
 FROM debian:unstable
 
-RUN apt update
-
-RUN apt install wget curl -y
-
-RUN wget http://repo.pureos.net/pureos/pool/main/p/pureos-archive-keyring/pureos-archive-keyring_2024.04.0_all.deb -O/root/pureos-keyring.deb &&\
-    apt install /root/pureos-keyring.deb -y
-
-RUN rm /etc/apt/sources.list.d/debian.sources
-
-RUN echo "deb https://repo.pureos.net/pureos landing main" > /etc/apt/sources.list
-
 # Update and install required packages
 RUN apt update && apt upgrade -y && apt install -y \
     systemd \
-    libsystemd0 \
-    systemd-timesyncd \
-    systemd-cryptsetup \
     systemd-sysv \
     openssh-server \
     sudo \
