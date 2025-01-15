@@ -15,6 +15,7 @@ RUN echo "deb https://repo.pureos.net/pureos landing main" > /etc/apt/sources.li
 # Update and install required packages
 RUN apt update && apt upgrade -y && apt install -y \
     systemd \
+    systemd-timesyncd \
     systemd-sysv \
     openssh-server \
     sudo \
