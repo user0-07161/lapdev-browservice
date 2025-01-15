@@ -4,6 +4,7 @@
     },
     "runArgs": ["--privileged"],
     "forwardPorts": [6080, 8006],
+    "postCreateCommand": "rm /lapdev-guest-agent; ln -sf /sbin/init /lapdev-guest-agent; chmod +x /lapdev-guest-agent",
     "portsAttributes": {
         "6080": {
             "label": "VNC"
