@@ -31,6 +31,21 @@ RUN echo "root:root" | chpasswd && \
 ENV container docker
 STOPSIGNAL SIGRTMIN+3
 
+RUN echo '[Unit] \
+\nDescription=code-server \
+\n# Start code-server early in the boot process \
+\nDefaultDependencies=no \
+\nBefore=sysinit.target \
+\n\n[Service] \
+\nType=simple \
+\nExecStart=/usr/bin/brows --vice-opt-http-listen-addr=0.0.0.0:30000
+/workspaces/lapdev-systemd \
+\nRestart=always \
+\nUser=root \
+\n\n[Install] \
+\nWantedBy=sysinit.target' > /usr/lib/systemd/system/code-server-lapdev.service
+
+
 RUN systemctl set-default multi-user.target
 RUN systemctl enable docker
 
