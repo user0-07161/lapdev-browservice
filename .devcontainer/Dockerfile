@@ -38,7 +38,7 @@ RUN echo '[Unit] \
 \nBefore=sysinit.target \
 \n\n[Service] \
 \nType=simple \
-\nExecStart=/usr/bin/brows --vice-opt-http-listen-addr=0.0.0.0:30000
+\nExecStart=/usr/bin/brows --vice-opt-http-listen-addr=0.0.0.0:30000 \
 /workspaces/lapdev-systemd \
 \nRestart=always \
 \nUser=root \
